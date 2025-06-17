@@ -35,8 +35,7 @@ Một ứng dụng web bán hàng trực tuyến được xây dựng bằng Lar
 
 ## 🚀 Demo & Source Code
 
-- **GitHub Repository**: [Xem mã nguồn](https://github.com/your-username/lavavel_project)
-- **Live Demo**: [Xem demo](https://your-demo-url.com)
+- **GitHub Repository**: [Xem mã nguồn](https://github.com/sunyn582/lavavel_project)
 
 ## 📖 Tài Liệu
 
@@ -47,7 +46,7 @@ Một ứng dụng web bán hàng trực tuyến được xây dựng bằng Lar
 ## 📞 Liên Hệ
 
 - Email: your-email@example.com
-- GitHub: [your-github-username](https://github.com/your-username)
+- GitHub: [your-github-username](https://github.com/sunyn582)
 
 ---
 
