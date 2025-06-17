@@ -1,0 +1,49 @@
+# Cấu hình GitHub Pages Jekyll
+title: "Hệ Thống Bán Hàng Laravel"
+description: "Một ứng dụng web bán hàng trực tuyến được xây dựng bằng Laravel 12.x"
+url: "https://your-username.github.io"
+baseurl: "/repository-name"
+
+# Theme
+theme: minima
+# Hoặc sử dụng remote theme:
+# remote_theme: pages-themes/minimal@v0.2.0
+
+# Markdown processor
+markdown: kramdown
+highlighter: rouge
+
+# Plugin
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# SEO
+author: "Your Name"
+email: "your-email@example.com"
+
+# Navigation
+header_pages:
+  - README.md
+
+# Build settings
+exclude:
+  - vendor/
+  - app/
+  - bootstrap/
+  - config/
+  - database/
+  - public/
+  - resources/
+  - routes/
+  - storage/
+  - tests/
+  - .env
+  - .env.example
+  - artisan
+  - composer.json
+  - composer.lock
+  - package.json
+  - package-lock.json
+  - phpunit.xml
+  - vite.config.js
