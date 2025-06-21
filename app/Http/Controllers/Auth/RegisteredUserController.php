@@ -45,6 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('welcome'))->with('success', 'Tài khoản đã được tạo thành công! Chào mừng bạn đến với ShopOnline.');
     }
 }

@@ -14,18 +14,27 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Điện thoại',
-            'description' => 'Các sản phẩm điện thoại thông minh'
+            'name' => 'Đồ điện tử',
+            'slug' => 'electronics',
+            'description' => 'Các sản phẩm công nghệ và gia dụng điện tử'
         ]);
 
         Category::create([
-            'name' => 'Laptop',
-            'description' => 'Máy tính xách tay và phụ kiện'
+            'name' => 'Đồ làm đẹp',
+            'slug' => 'beauty',
+            'description' => 'Sản phẩm làm đẹp và chăm sóc cá nhân'
         ]);
 
         Category::create([
-            'name' => 'Phụ kiện',
-            'description' => 'Phụ kiện điện tử và công nghệ'
+            'name' => 'Quần áo',
+            'slug' => 'clothing',
+            'description' => 'Thời trang nam và nữ'
+        ]);
+
+        Category::create([
+            'name' => 'Đồ khác',
+            'slug' => 'others',
+            'description' => 'Các sản phẩm khác'
         ]);
     }
 }

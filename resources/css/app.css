@@ -1,11 +1,122 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* Custom component styles */
+.btn-primary {
+  @apply bg-black text-white hover:bg-gray-800 px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.btn-outline {
+  @apply border border-gray-300 bg-white hover:bg-gray-50 hover:text-gray-900 px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.card {
+  @apply bg-white text-gray-900 rounded-lg border border-gray-200 shadow-sm;
+}
+
+.card-header {
+  @apply flex flex-col space-y-1.5 p-6;
+}
+
+.card-content {
+  @apply p-6 pt-0;
+}
+
+.card-footer {
+  @apply flex items-center p-6 pt-0;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors;
+}
+
+.badge-primary {
+  @apply bg-black text-white hover:bg-gray-800;
+}
+
+.badge-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+}
+
+.input {
+  @apply flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.text-primary {
+  @apply text-black;
+}
+
+.text-muted-foreground {
+  @apply text-gray-600;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Product card enhancements */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.container {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Performance optimizations */
+.card {
+  contain: layout style paint;
+}
+
+.card img {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Preload critical fonts */
+@font-face {
+  font-family: 'Arial';
+  font-display: swap;
+}
+
+/* Reduce layout shifts */
+.aspect-square {
+  contain: size layout;
+}
+
+/* Optimize transitions */
+.transition-transform {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-shadow {
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
