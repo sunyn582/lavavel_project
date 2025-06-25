@@ -5,13 +5,16 @@
 
             <!-- Category Filter -->
             <div class="flex flex-wrap gap-2 mb-4">
-                <a href="{{ route('welcome') }}" class="btn-primary {{ !request('category') ? 'bg-primary text-primary-foreground' : 'btn-outline' }}">
-                    Tất cả
+                <a href="{{ route('welcome') }}"
+                   class="btn-outline transition-colors duration-200 {{ !request('category') ? 'bg-gray-700 border-gray-700' : 'hover:bg-gray-200' }}"
+                   style="{{ !request('category') ? 'color: #ffd600 !important;' : '' }}">
+                    <span>Tất cả</span>
                 </a>
                 @foreach($categories as $category)
-                    <a href="{{ route('welcome', ['category' => $category->slug]) }}" 
-                       class="btn-outline {{ request('category') == $category->slug ? 'bg-primary text-primary-foreground' : '' }}">
-                        {{ $category->name }}
+                    <a href="{{ route('welcome', ['category' => $category->slug]) }}"
+                       class="btn-outline transition-colors duration-200 {{ request('category') == $category->slug ? 'bg-gray-700 border-gray-700' : 'hover:bg-gray-200' }}"
+                       style="{{ request('category') == $category->slug ? 'color: #ffd600 !important;' : '' }}">
+                        <span>{{ $category->name }}</span>
                     </a>
                 @endforeach
             </div>
@@ -30,7 +33,7 @@
                                          loading="lazy"
                                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                                 @elseif($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}"
+                                    <img src="{{ asset('images/products/' . $product->image) }}"
                                          alt="{{ $product->name }}"
                                          loading="lazy"
                                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">

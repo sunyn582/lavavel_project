@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
             'stock' => 15,
             'category_id' => 1,
             'rating' => 4.8,
-            'image' => null
+            'image' => 'products/Apple-iPhone-15-Pro.png'
         ]);
 
         Product::create([
@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
             'stock' => 0, // Hết hàng
             'category_id' => 1,
             'rating' => 4.5,
-            'image' => null
+            'image' => 'products/may-xay-sinh-to.png'
         ]);
 
         Product::create([
@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
             'stock' => 5, // Ít hàng
             'category_id' => 1,
             'rating' => 4.6,
-            'image' => null
+            'image' => 'products/tai-nghe-bluetooth.png'
         ]);
 
         Product::create([
@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
             'stock' => 25,
             'category_id' => 1,
             'rating' => 4.9,
-            'image' => null
+            'image' => 'products/macbook-air-m2.png'
         ]);
 
         Product::create([
@@ -61,7 +61,7 @@ class ProductSeeder extends Seeder
             'stock' => 0, // Hết hàng
             'category_id' => 1,
             'rating' => 4.7,
-            'image' => null
+            'image' => 'products/samsung_galaxy_s24_ultra.jpg'
         ]);
 
         // Đồ làm đẹp (category_id: 2)
@@ -72,7 +72,7 @@ class ProductSeeder extends Seeder
             'stock' => 8, // Ít hàng
             'category_id' => 2,
             'rating' => 4.7,
-            'image' => null
+            'image' => 'products/son-moi-dior.png'
         ]);
 
         Product::create([
@@ -82,7 +82,7 @@ class ProductSeeder extends Seeder
             'stock' => 35,
             'category_id' => 2,
             'rating' => 4.4,
-            'image' => null
+            'image' => 'products/son-duong-dior.png'
         ]);
 
         Product::create([
@@ -92,7 +92,7 @@ class ProductSeeder extends Seeder
             'stock' => 0, // Hết hàng
             'category_id' => 2,
             'rating' => 4.6,
-            'image' => null
+            'image' => 'products/Serum-Vitamin-C.png'
         ]);
 
         Product::create([
@@ -102,7 +102,7 @@ class ProductSeeder extends Seeder
             'stock' => 50,
             'category_id' => 2,
             'rating' => 4.3,
-            'image' => null
+            'image' => 'products/Sữa-rửa-măt.png'
         ]);
 
         // Quần áo (category_id: 3)
@@ -113,7 +113,7 @@ class ProductSeeder extends Seeder
             'stock' => 20,
             'category_id' => 3,
             'rating' => 4.3,
-            'image' => null
+            'image' => 'products/ao-so-mi-nam.png'
         ]);
 
         Product::create([
@@ -123,7 +123,7 @@ class ProductSeeder extends Seeder
             'stock' => 3, // Ít hàng
             'category_id' => 3,
             'rating' => 4.5,
-            'image' => null
+            'image' => 'products/Váy_đầm_nữ.png'
         ]);
 
         Product::create([
@@ -133,7 +133,7 @@ class ProductSeeder extends Seeder
             'stock' => 0, // Hết hàng
             'category_id' => 3,
             'rating' => 4.4,
-            'image' => null
+            'image' => 'products/Quần_jeans_nam.png'
         ]);
 
         Product::create([
@@ -143,7 +143,7 @@ class ProductSeeder extends Seeder
             'stock' => 12,
             'category_id' => 3,
             'rating' => 4.6,
-            'image' => null
+            'image' => 'products/áo-khoác-hoodie.png'
         ]);
     }
 }

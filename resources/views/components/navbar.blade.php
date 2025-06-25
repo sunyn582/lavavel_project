@@ -22,6 +22,14 @@
                         </button>
                     </a>
 
+                    <!-- Orders -->
+                    <a href="{{ route('orders.index') }}" class="btn-outline flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h3m4 0a2 2 0 00-2-2V7a2 2 0 00-2-2h-4a2 2 0 00-2 2v2a2 2 0 002 2h4"></path>
+                        </svg>
+                        Đơn hàng
+                    </a>
+
                     <!-- User Dropdown -->
                     <div class="relative group">
                         <button class="btn-outline flex items-center">
@@ -103,6 +111,14 @@
                             @if(session('cart') && count(session('cart')) > 0)
                                 <span class="badge badge-primary ml-auto">{{ array_sum(array_column(session('cart'), 'quantity')) }}</span>
                             @endif
+                        </button>
+                    </a>
+                    <a href="{{ route('orders.index') }}" class="block">
+                        <button class="btn-outline w-full justify-start flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h3m4 0a2 2 0 00-2-2V7a2 2 0 00-2-2h-4a2 2 0 00-2 2v2a2 2 0 002 2h4"></path>
+                            </svg>
+                            Đơn hàng
                         </button>
                     </a>
                     <a href="{{ route('profile.edit') }}" class="block">

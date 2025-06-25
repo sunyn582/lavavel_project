@@ -16,20 +16,15 @@
                              loading="lazy"
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     @elseif($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}"
+                        <img src="{{ asset('images/' . $product->image) }}"
                              alt="{{ $product->name }}"
                              loading="lazy"
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     @else
-                        @php
-                            $categoryType = match($product->category_id) {
-                                1 => 'electronics',
-                                2 => 'beauty',
-                                3 => 'clothing',
-                                default => 'default'
-                            };
-                        @endphp
-                        <x-product-placeholder :category="$categoryType" :name="$product->name" />
+                        <img src="{{ asset('images/products/default.png') }}"
+                             alt="No image"
+                             loading="lazy"
+                             class="w-full h-full object-cover opacity-80">
                     @endif
                 </div>
                 

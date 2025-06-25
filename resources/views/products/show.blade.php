@@ -4,7 +4,7 @@
             <!-- Product Image -->
             <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                 @if($product->image)
-                    <img src="{{ filter_var($product->image, FILTER_VALIDATE_URL) ? $product->image : asset('storage/' . $product->image) }}"
+                    <img src="{{ filter_var($product->image, FILTER_VALIDATE_URL) ? $product->image : asset('images/' . $product->image) }}"
                          alt="{{ $product->name }}"
                          class="w-full h-full object-cover">
                 @else
