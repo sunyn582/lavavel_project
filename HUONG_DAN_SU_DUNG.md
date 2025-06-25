@@ -168,7 +168,7 @@ Website ShopOnline là một cửa hàng trực tuyến đầy đủ tính năng
 - 📦 Checkout 2 bước (thông tin + thanh toán)
 - 💰 2 phương thức: COD & Chuyển khoản
 - 📋 Quản lý đơn hàng với trạng thái
-- 📧 Thông tin chuyển khoản tự động
+- 📧 Thông tin chuyển khoản tự động lưu
 - 🧾 Hóa đơn chi tiết sau đặt hàng
 
 ## 🐛 XỬ LÝ LỖI
