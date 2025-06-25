@@ -125,11 +125,14 @@
             <a href="{{ route('welcome') }}" class="btn-primary inline-block px-8 py-3">
                 Tiếp tục mua sắm
             </a>
+            <!-- Đã tắt nút xem chi tiết đơn hàng theo yêu cầu -->
+            <!--
             <div>
                 <a href="{{ route('orders.show', $order->id) }}" class="btn-outline inline-block px-6 py-2">
                     Xem chi tiết đơn hàng
                 </a>
             </div>
+            -->
         </div>
     </div>
 </x-app-layout>

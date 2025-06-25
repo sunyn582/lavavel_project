@@ -26,6 +26,7 @@ require __DIR__.'/auth.php';
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('orders', OrderController::class)->middleware('auth');
+Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel')->middleware('auth');
 Route::resource('reviews', ReviewController::class)->middleware('auth');
 
 // Giỏ hàng

@@ -73,4 +73,19 @@ class OrderController extends Controller
         
         return view('orders.show', compact('order'));
     }
+public function cancel(Request $request, Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+        if ($order->order_status === 'cancelled') {
+            return redirect()->route('orders.index')->with('error', 'Đơn hàng đã được huỷ trước đó.');
+        }
+        if (!in_array($order->order_status, ['processing', 'shipped'])) {
+            return redirect()->route('orders.index')->with('error', 'Không thể huỷ đơn hàng ở trạng thái hiện tại.');
+        }
+        $order->order_status = 'cancelled';
+        $order->save();
+        return redirect()->route('orders.index')->with('success', 'Đã huỷ đơn hàng thành công.');
+    }
 }
