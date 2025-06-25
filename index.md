@@ -1,53 +1,169 @@
----
-layout: default
-title: Trang Chủ
----
+# Laravel Online Store
 
-# 🛒 Hệ Thống Bán Hàng Laravel
+![Laravel Online Store Banner](public/images/products/Apple-iPhone-15-Pro.png)
 
-Một ứng dụng web bán hàng trực tuyến được xây dựng bằng Laravel 12.x với đầy đủ tính năng quản lý sản phẩm, đơn hàng và người dùng.
+## 🛒 Giới thiệu
 
-## ✨ Tính Năng Chính
-
-### 🏪 Cho Khách Hàng
-- **Duyệt sản phẩm**: Xem danh sách sản phẩm theo danh mục
-- **Chi tiết sản phẩm**: Xem thông tin chi tiết và đánh giá sản phẩm
-- **Giỏ hàng**: Thêm, cập nhật, xóa sản phẩm trong giỏ hàng
-- **Đặt hàng**: Tạo và theo dõi đơn hàng
-- **Đánh giá**: Viết đánh giá cho sản phẩm đã mua
-- **Quản lý tài khoản**: Cập nhật thông tin cá nhân
-
-### 👨‍💼 Cho Admin
-- **Dashboard**: Tổng quan thống kê bán hàng
-- **Quản lý sản phẩm**: CRUD sản phẩm và danh mục
-- **Quản lý đơn hàng**: Xem và cập nhật trạng thái đơn hàng
-- **Quản lý người dùng**: Xem danh sách khách hàng
-
-## 🛠️ Công Nghệ Sử Dụng
-
-- **Framework**: Laravel 12.x
-- **PHP**: ^8.2
-- **Authentication**: Laravel Breeze
-- **Database**: MySQL
-- **Frontend**: Blade Templates + CSS + JavaScript
-- **Build Tool**: Vite
-- **Testing**: Pest PHP
-
-## 🚀 Demo & Source Code
-
-- **GitHub Repository**: [Xem mã nguồn](https://github.com/sunyn582/lavavel_project)
-
-## 📖 Tài Liệu
-
-- [Hướng dẫn cài đặt](./installation)
-- [API Documentation](./api)
-- [Contributing Guide](./contributing)
-
-## 📞 Liên Hệ
-
-- Email: your-email@example.com
-- GitHub: [your-github-username](https://github.com/sunyn582)
+**Laravel Online Store** là một hệ thống thương mại điện tử hoàn chỉnh, xây dựng bằng Laravel, hỗ trợ quản lý sản phẩm, danh mục, giỏ hàng, đặt hàng, đánh giá, phân quyền người dùng, giao diện hiện đại và dễ mở rộng cho nhiều mục đích kinh doanh.
 
 ---
 
-⭐ Nếu dự án này hữu ích cho bạn, hãy cho một star nhé!
+## 🌟 Danh sách tính năng chi tiết
+
+### 1. Quản lý sản phẩm
+- Thêm, sửa, xóa sản phẩm với các trường: tên, mô tả, giá, tồn kho, hình ảnh, đánh giá, danh mục.
+- Hỗ trợ upload ảnh sản phẩm, lưu trữ ảnh trong thư mục `public/images/products`.
+- Hiển thị danh sách sản phẩm với phân trang, tìm kiếm, lọc theo danh mục.
+- Xem chi tiết sản phẩm, hiển thị thông tin, đánh giá, tồn kho.
+
+### 2. Quản lý danh mục
+- Thêm, sửa, xóa danh mục sản phẩm.
+- Gán sản phẩm vào danh mục, lọc sản phẩm theo danh mục.
+- Hỗ trợ slug cho SEO.
+
+### 3. Giỏ hàng & đặt hàng
+- Thêm sản phẩm vào giỏ hàng, cập nhật số lượng, xóa khỏi giỏ.
+- Đặt hàng, lưu thông tin đơn hàng và chi tiết từng sản phẩm.
+- Quản lý đơn hàng cho cả user và admin.
+
+### 4. Đánh giá sản phẩm
+- Người dùng có thể đánh giá, nhận xét sản phẩm đã mua.
+- Hiển thị điểm đánh giá trung bình trên từng sản phẩm.
+
+### 5. Quản trị viên (Admin)
+- Đăng nhập với quyền admin để quản lý toàn bộ sản phẩm, danh mục, đơn hàng, người dùng.
+- Giao diện quản trị riêng biệt, bảo vệ bằng middleware.
+
+### 6. Người dùng
+- Đăng ký, đăng nhập, cập nhật thông tin cá nhân.
+- Xem lịch sử đơn hàng, trạng thái đơn hàng.
+- Đổi mật khẩu, quên mật khẩu qua email.
+
+### 7. Giao diện & trải nghiệm
+- Responsive, tối ưu cho mọi thiết bị với TailwindCSS.
+- Navbar, phân trang, thông báo, xác nhận thao tác.
+- Trang đăng nhập, đăng ký, quản lý tài khoản, giỏ hàng, checkout, dashboard admin.
+
+### 8. Seed dữ liệu mẫu
+- Tích hợp sẵn các seeder cho sản phẩm, danh mục, người dùng để thử nghiệm nhanh.
+
+### 9. Bảo mật & hiệu năng
+- Xác thực CSRF, phân quyền route, validate dữ liệu đầu vào.
+- Sử dụng cache cho danh mục và sản phẩm để tăng tốc độ tải trang.
+
+---
+
+## 🗂️ Sơ đồ cấu trúc dự án
+
+```
+laravel_online_store/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── ProductController.php
+│   │   │   ├── CategoryController.php
+│   │   │   ├── CartController.php
+│   │   │   ├── OrderController.php
+│   │   │   └── ...
+│   │   └── Middleware/
+│   ├── Models/
+│   │   ├── Product.php
+│   │   ├── Category.php
+│   │   ├── Order.php
+│   │   └── ...
+│   └── ...
+├── resources/
+│   ├── views/
+│   │   ├── products/
+│   │   │   ├── index.blade.php
+│   │   │   ├── show.blade.php
+│   │   │   └── ...
+│   │   ├── admin/
+│   │   │   └── products/
+│   │   ├── components/
+│   │   └── ...
+│   ├── css/
+│   └── js/
+├── public/
+│   └── images/
+│       └── products/
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+├── routes/
+│   ├── web.php
+│   └── auth.php
+├── config/
+├── package.json
+├── composer.json
+└── index.md
+```
+
+---
+
+## ⚡ Hướng dẫn cài đặt & sử dụng
+
+### 1. Clone dự án
+
+```bash
+git clone https://github.com/your-username/laravel-online-store.git
+cd laravel-online-store
+```
+
+### 2. Cài đặt Composer & NPM
+
+```bash
+composer install
+npm install
+```
+
+### 3. Tạo file môi trường
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Cấu hình database trong `.env` rồi chạy migrate & seed
+
+```bash
+php artisan migrate --seed
+```
+
+### 5. Build frontend
+
+```bash
+npm run build
+```
+
+### 6. Khởi động server
+
+```bash
+php artisan serve
+```
+
+Truy cập: [http://localhost:8000](http://localhost:8000)
+
+---
+
+## 👤 Tài khoản mẫu
+
+- **Admin:**  
+  Email: test@example.com  
+  Password: password
+
+---
+
+## 💡 Đóng góp
+
+Mọi đóng góp, issue hoặc pull request đều được hoan nghênh!  
+Vui lòng tạo issue hoặc PR trên GitHub để cùng phát triển dự án.
+
+---
+
+## 📄 License
+
+MIT License
+
+---
