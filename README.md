@@ -247,57 +247,6 @@ $this->authorize('update', $product);
 
 ---
 
-### Sơ đồ quan hệ đối tượng
-
-```mermaid
-erDiagram
-    USER ||--o{ ORDER : "đặt"
-    ORDER ||--|{ ORDER_ITEM : "gồm"
-    PRODUCT ||--o{ ORDER_ITEM : "được đặt"
-    USER ||--o{ REVIEW : "đánh giá"
-    PRODUCT ||--o{ REVIEW : "có"
-    PRODUCT }o--o{ CATEGORY : "thuộc"
-```
-
-**Các đối tượng chính:**
-- **User:** Người dùng hệ thống (khách hàng, admin), có thể đăng ký, đăng nhập, đặt hàng, đánh giá sản phẩm.
-- **Product:** Sản phẩm được bán, có các thuộc tính như tên, giá, tồn kho, hình ảnh, danh mục, đánh giá.
-- **Order:** Đơn hàng của người dùng, gồm nhiều sản phẩm (OrderItem).
-- **OrderItem:** Sản phẩm cụ thể trong một đơn hàng.
-- **Category:** Danh mục sản phẩm.
-- **Review:** Đánh giá sản phẩm của người dùng.
-
----
-
-## 🔐 Định danh & xác thực
-
-- Sử dụng Laravel Breeze để cung cấp chức năng đăng ký, đăng nhập, xác thực email, đổi mật khẩu, quên mật khẩu.
-- Phân quyền người dùng (admin, user) bằng middleware.
-- Quản lý session, cookies, xác thực CSRF cho mọi request.
-
----
-
-## 📝 Chức năng CRUD
-
-- Xây dựng đầy đủ CRUD (Create, Read, Update, Delete) cho đối tượng **Product** và **Category**.
-- Người dùng có thể xem, tìm kiếm, lọc sản phẩm.
-- Admin có thể thêm, sửa, xóa sản phẩm và danh mục qua giao diện quản trị.
-- Đơn hàng (Order) và đánh giá (Review) cũng hỗ trợ tạo, xem, xóa (theo quyền).
-
----
-
-## 🛡️ Yêu cầu bảo mật
-
-- **CSRF:** Bảo vệ tất cả các form và API bằng CSRF token.
-- **XSS:** Escape dữ liệu đầu ra, sử dụng Blade template an toàn.
-- **Validation:** Kiểm tra dữ liệu đầu vào phía server (FormRequest, validate).
-- **Authentication & Authorization:** Xác thực người dùng, phân quyền truy cập route.
-- **Session & Cookies:** Quản lý đăng nhập, lưu trạng thái an toàn.
-- **SQL Injection:** Sử dụng Eloquent ORM, Query Builder để tránh injection.
-- **Password Hashing:** Lưu mật khẩu đã mã hóa (bcrypt).
-- **Rate Limiting:** Giới hạn số lần request với middleware throttle.
-
----
 
 ## 🗂️ Sơ đồ cấu trúc dự án
 
@@ -404,18 +353,6 @@ Truy cập: [http://localhost:8000](http://localhost:8000)
 ## 💡 Đóng góp
 
 Mọi đóng góp, issue hoặc pull request đều được hoan nghênh!  
-Vui lòng tạo issue hoặc PR trên GitHub để cùng phát triển dự án.
-
----
-
-## 📄 License
-
-MIT License
-
----
-
-## 📢 Hiển thị README trên trang chính GitHub
-
-Chỉ cần đặt file `README.md` ở thư mục gốc repo, GitHub sẽ tự động hiển thị nội dung này trên trang chính của dự án.
+Vui lòng tạo issue hoặc PR trên GitHub để cùng phát triển dự án
 
 ---
