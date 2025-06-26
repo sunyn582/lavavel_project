@@ -1,7 +1,5 @@
 # Laravel Online Store
 
-![Laravel Online Store Banner](public/images/products/Apple-iPhone-15-Pro.png)
-
 ## 🛒 Giới thiệu
 
 **Laravel Online Store** là một hệ thống thương mại điện tử hoàn chỉnh, xây dựng bằng Laravel, hỗ trợ quản lý sản phẩm, danh mục, giỏ hàng, đặt hàng, đánh giá, phân quyền người dùng, giao diện hiện đại và dễ mở rộng cho nhiều mục đích kinh doanh.
@@ -50,6 +48,254 @@
 ### 9. Bảo mật & hiệu năng
 - Xác thực CSRF, phân quyền route, validate dữ liệu đầu vào.
 - Sử dụng cache cho danh mục và sản phẩm để tăng tốc độ tải trang.
+
+---
+
+## 🗺️ Sơ đồ đối tượng & chức năng chính
+
+---
+
+### Sơ đồ quan hệ đối tượng
+
+```mermaid
+erDiagram
+    USER ||--o{ ORDER : "đặt"
+    ORDER ||--|{ ORDER_ITEM : "gồm"
+    PRODUCT ||--o{ ORDER_ITEM : "được đặt"
+    USER ||--o{ REVIEW : "đánh giá"
+    PRODUCT ||--o{ REVIEW : "có"
+    PRODUCT }o--o{ CATEGORY : "thuộc"
+```
+
+#### Mô tả chi tiết các đối tượng
+
+| Đối tượng   | Thuộc tính chính                                                                 | Mối quan hệ                                                                 |
+|-------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **User**    | id, name, email, password, role, address, phone                                  | Có nhiều Order, nhiều Review                                                |
+| **Product** | id, name, description, price, stock, image, category_id, rating                  | Thuộc về Category, có nhiều OrderItem, nhiều Review                         |
+| **Category**| id, name, slug                                                                   | Có nhiều Product                                                            |
+| **Order**   | id, user_id, total_price, status, created_at                                     | Thuộc về User, có nhiều OrderItem                                           |
+| **OrderItem**| id, order_id, product_id, quantity, price                                       | Thuộc về Order, tham chiếu Product                                          |
+| **Review**  | id, user_id, product_id, rating, comment, created_at                             | Thuộc về User và Product                                                    |
+
+**Ví dụ dữ liệu mẫu:**
+
+- User: Nguyễn Văn A, email: a@gmail.com, role: user
+- Product: iPhone 15 Pro, price: 30,000,000 VNĐ, stock: 10, category: Điện thoại
+- Category: Điện thoại, slug: dien-thoai
+- Order: user_id: 1, total_price: 60,000,000 VNĐ, status: completed
+- OrderItem: order_id: 1, product_id: 2, quantity: 2, price: 60,000,000 VNĐ
+- Review: user_id: 1, product_id: 2, rating: 5, comment: "Sản phẩm tốt!"
+
+**Tình huống sử dụng thực tế:**
+- Người dùng đăng ký, đăng nhập, duyệt sản phẩm, thêm vào giỏ, đặt hàng, đánh giá sản phẩm.
+- Admin quản lý sản phẩm, danh mục, đơn hàng, người dùng, kiểm duyệt đánh giá.
+
+---
+
+## 🔐 Định danh & xác thực
+
+### Quy trình xác thực & phân quyền
+
+- Sử dụng Laravel Breeze để triển khai đăng ký, đăng nhập, xác thực email, đổi mật khẩu, quên mật khẩu.
+- Đăng ký: Người dùng nhập thông tin, xác thực email qua link gửi về hộp thư.
+- Đăng nhập: Kiểm tra email, mật khẩu, lưu session và cookies.
+- Phân quyền: Sử dụng middleware (`auth`, `admin`) để bảo vệ route quản trị.
+- Đăng xuất: Xóa session, cookies.
+- Quên mật khẩu: Gửi email reset, xác thực token.
+- Đổi mật khẩu: Yêu cầu nhập mật khẩu cũ, xác thực trước khi đổi.
+
+**Sơ đồ luồng xác thực:**
+```mermaid
+flowchart TD
+    A[Đăng ký/Đăng nhập] --> B{Xác thực thành công?}
+    B -- Có --> C[Chuyển đến dashboard]
+    B -- Không --> D[Hiển thị lỗi]
+    C --> E{Vai trò admin?}
+    E -- Có --> F[Chuyển đến trang quản trị]
+    E -- Không --> G[Chuyển đến trang người dùng]
+```
+
+**Ví dụ route xác thực:**
+```php
+// routes/auth.php
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+```
+
+**Phân quyền trong controller:**
+```php
+public function __construct()
+{
+    $this->middleware('auth');
+    $this->middleware('admin')->only(['destroy', 'edit', 'update']);
+}
+```
+
+**Kiểm tra quyền trong Blade:**
+```blade
+@can('update', $product)
+    <a href="{{ route('products.edit', $product) }}">Sửa</a>
+@endcan
+```
+
+---
+
+## 📝 Chức năng CRUD
+
+### CRUD cho Product (Sản phẩm)
+
+- **Create:** Admin thêm sản phẩm mới qua form hoặc API `/admin/products/create`.
+- **Read:** Hiển thị danh sách sản phẩm, tìm kiếm, lọc, xem chi tiết.
+- **Update:** Admin chỉnh sửa thông tin sản phẩm.
+- **Delete:** Admin xóa sản phẩm khỏi hệ thống.
+
+**Ví dụ route CRUD:**
+```php
+Route::resource('products', ProductController::class);
+```
+
+**Ví dụ giao diện:**
+- Trang admin: Thêm/sửa/xóa sản phẩm, upload ảnh, nhập thông tin chi tiết.
+- Trang người dùng: Xem danh sách, tìm kiếm, lọc theo danh mục, xem chi tiết sản phẩm.
+
+**API mẫu (JSON):**
+- `GET /api/products` – Lấy danh sách sản phẩm
+- `POST /api/products` – Thêm sản phẩm (yêu cầu quyền admin)
+- `PUT /api/products/{id}` – Sửa sản phẩm
+- `DELETE /api/products/{id}` – Xóa sản phẩm
+
+**Ví dụ FormRequest validate khi thêm sản phẩm:**
+```php
+public function rules()
+{
+    return [
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'image' => 'nullable|image|max:2048',
+        'category_id' => 'required|exists:categories,id',
+        // ...
+    ];
+}
+```
+
+### CRUD cho Category (Danh mục)
+
+- Tương tự Product, hỗ trợ thêm/sửa/xóa/lấy danh mục.
+- Cho phép admin quản lý danh mục, người dùng lọc sản phẩm theo danh mục.
+
+### CRUD cho Order & Review
+
+- Người dùng tạo đơn hàng khi checkout, xem lịch sử đơn hàng.
+- Người dùng đánh giá sản phẩm đã mua, admin có thể xóa review vi phạm.
+- Đơn hàng lưu chi tiết từng sản phẩm (OrderItem), trạng thái đơn hàng (pending, completed, canceled).
+
+---
+
+## 🛡️ Yêu cầu bảo mật
+
+### Các biện pháp bảo mật đã triển khai
+
+- **CSRF:** Tất cả form sử dụng `@csrf` trong Blade, API dùng middleware `VerifyCsrfToken`.
+- **XSS:** Escape dữ liệu với Blade (`{{ $var }}`), không dùng `{!! !!}` cho dữ liệu người dùng.
+- **Validation:** Sử dụng FormRequest để validate dữ liệu đầu vào, ví dụ:
+    ```php
+    public function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            // ...
+        ];
+    }
+    ```
+- **Authentication & Authorization:** Sử dụng middleware `auth`, `can`, `policy` để kiểm soát truy cập.
+- **Session & Cookies:** Cấu hình session trong `config/session.php`, chỉ lưu thông tin cần thiết, đặt thời gian timeout hợp lý.
+- **SQL Injection:** Chỉ sử dụng Eloquent/Query Builder, không dùng query thuần với input người dùng.
+- **Password Hashing:** Laravel tự động hash mật khẩu với bcrypt khi đăng ký/đổi mật khẩu.
+- **Rate Limiting:** Sử dụng middleware `throttle:60,1` cho các route nhạy cảm.
+- **Logging:** Ghi log các hành động quan trọng (đăng nhập, thay đổi thông tin, xóa dữ liệu).
+- **File Upload Security:** Kiểm tra định dạng, kích thước file khi upload ảnh sản phẩm.
+- **Error Handling:** Không hiển thị lỗi chi tiết cho người dùng cuối, log lỗi nội bộ.
+
+**Ví dụ cấu hình session:**
+```php
+// config/session.php
+'lifetime' => 120,
+'secure' => env('SESSION_SECURE_COOKIE', true),
+```
+
+**Ví dụ validate dữ liệu đầu vào:**
+```php
+$request->validate([
+    'email' => 'required|email',
+    'password' => 'required|min:8',
+]);
+```
+
+**Ví dụ sử dụng policy:**
+```php
+$this->authorize('update', $product);
+```
+
+**Lưu ý bảo mật thực tế:**
+- Không commit file .env lên git.
+- Đặt quyền truy cập thư mục public/images phù hợp.
+- Sử dụng HTTPS cho mọi giao dịch.
+- Thường xuyên cập nhật Laravel và các package bảo mật.
+
+---
+
+### Sơ đồ quan hệ đối tượng
+
+```mermaid
+erDiagram
+    USER ||--o{ ORDER : "đặt"
+    ORDER ||--|{ ORDER_ITEM : "gồm"
+    PRODUCT ||--o{ ORDER_ITEM : "được đặt"
+    USER ||--o{ REVIEW : "đánh giá"
+    PRODUCT ||--o{ REVIEW : "có"
+    PRODUCT }o--o{ CATEGORY : "thuộc"
+```
+
+**Các đối tượng chính:**
+- **User:** Người dùng hệ thống (khách hàng, admin), có thể đăng ký, đăng nhập, đặt hàng, đánh giá sản phẩm.
+- **Product:** Sản phẩm được bán, có các thuộc tính như tên, giá, tồn kho, hình ảnh, danh mục, đánh giá.
+- **Order:** Đơn hàng của người dùng, gồm nhiều sản phẩm (OrderItem).
+- **OrderItem:** Sản phẩm cụ thể trong một đơn hàng.
+- **Category:** Danh mục sản phẩm.
+- **Review:** Đánh giá sản phẩm của người dùng.
+
+---
+
+## 🔐 Định danh & xác thực
+
+- Sử dụng Laravel Breeze để cung cấp chức năng đăng ký, đăng nhập, xác thực email, đổi mật khẩu, quên mật khẩu.
+- Phân quyền người dùng (admin, user) bằng middleware.
+- Quản lý session, cookies, xác thực CSRF cho mọi request.
+
+---
+
+## 📝 Chức năng CRUD
+
+- Xây dựng đầy đủ CRUD (Create, Read, Update, Delete) cho đối tượng **Product** và **Category**.
+- Người dùng có thể xem, tìm kiếm, lọc sản phẩm.
+- Admin có thể thêm, sửa, xóa sản phẩm và danh mục qua giao diện quản trị.
+- Đơn hàng (Order) và đánh giá (Review) cũng hỗ trợ tạo, xem, xóa (theo quyền).
+
+---
+
+## 🛡️ Yêu cầu bảo mật
+
+- **CSRF:** Bảo vệ tất cả các form và API bằng CSRF token.
+- **XSS:** Escape dữ liệu đầu ra, sử dụng Blade template an toàn.
+- **Validation:** Kiểm tra dữ liệu đầu vào phía server (FormRequest, validate).
+- **Authentication & Authorization:** Xác thực người dùng, phân quyền truy cập route.
+- **Session & Cookies:** Quản lý đăng nhập, lưu trạng thái an toàn.
+- **SQL Injection:** Sử dụng Eloquent ORM, Query Builder để tránh injection.
+- **Password Hashing:** Lưu mật khẩu đã mã hóa (bcrypt).
+- **Rate Limiting:** Giới hạn số lần request với middleware throttle.
 
 ---
 
