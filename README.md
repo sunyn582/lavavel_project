@@ -6,6 +6,22 @@
 
 ---
 
+## 🛠️ Công nghệ sử dụng
+
+- **Laravel 12**: Framework PHP mạnh mẽ cho phát triển web.
+- **Laravel Breeze**: Định danh & xác thực người dùng (đăng ký, đăng nhập, xác thực email, quên mật khẩu).
+- **CRUD đầy đủ cho Product**: Quản lý sản phẩm (tạo, xem, sửa, xóa) với validation, upload ảnh, phân quyền.
+- **TailwindCSS**: Thiết kế giao diện hiện đại, responsive.
+- **MySQL**: Lưu trữ dữ liệu.
+- **Seeder & Migration**: Tạo dữ liệu mẫu và quản lý cấu trúc database.
+- **Các biện pháp bảo mật**: CSRF, XSS, xác thực, phân quyền, session, cookies, validation, chống SQL Injection, policy, middleware.
+- **RESTful API**: Hỗ trợ thao tác CRUD qua API cho Product.
+- **Session & Cookies**: Quản lý đăng nhập, bảo vệ thông tin người dùng.
+- **Eloquent ORM**: Truy vấn dữ liệu an toàn, tránh SQL Injection.
+- **Aiven Cloud Database**: Sử dụng Eloquent để migrate và đồng bộ dữ liệu các Object trực tiếp lên database cloud (sử dụng Aiven).
+
+---
+
 ## 🌟 Danh sách tính năng chi tiết
 
 ### 1. Quản lý sản phẩm
@@ -347,6 +363,7 @@ Truy cập: [http://localhost:8000](http://localhost:8000)
 - **Admin:**  
   Email: admin@shoponline.com  
   Password: password123
+  
   **User:**
   Email: user@example.com  
   Password: password123
