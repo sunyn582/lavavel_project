@@ -345,8 +345,11 @@ Truy cập: [http://localhost:8000](http://localhost:8000)
 ## 👤 Tài khoản mẫu
 
 - **Admin:**  
-  Email: test@example.com  
-  Password: password
+  Email: admin@shoponline.com  
+  Password: password123
+  **User:**
+  Email: user@example.com  
+  Password: password123
 
 ---
 
